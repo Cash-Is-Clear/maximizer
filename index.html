@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cash is Clear&#174; Maximizer</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Loading Panel -->
+    <div id="loading-panel" class="loading-panel">
+        <div class="loading-inner">
+            <img src="cash_is_clear_logo.jpeg" alt="Cash is Clear Logo" class="loading-logo">
+            <h1>Cash is Clear&#174; Maximizer</h1>
+            <div class="loading-spinner" aria-label="Loading data"></div>
+            <p class="loading-text">Loading strategies&hellip;</p>
+        </div>
+    </div>
+
+    <!-- Error Panel -->
+    <div id="error-panel" class="error-panel hidden">
+        <div class="error-inner">
+            <img src="cash_is_clear_logo.jpeg" alt="Cash is Clear Logo" class="loading-logo">
+            <h1>Cash is Clear&#174; Maximizer</h1>
+            <i class="fa-solid fa-triangle-exclamation error-icon"></i>
+            <h2>Could not load data</h2>
+            <p id="error-message" class="error-message"></p>
+            <button id="retry-btn" class="btn btn-primary">
+                <i class="fa-solid fa-rotate-right"></i> Try Again
+            </button>
+        </div>
+    </div>
+
+    <!-- Main App Container -->
+    <div id="app-container" class="app-container hidden">
+
+        <!-- Sidebar overlay (tablet + phone secondary filters) -->
+        <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+        <!-- Header -->
+        <header class="app-header">
+            <!-- Tablet: filter drawer toggle (left side) -->
+            <button id="sidebar-toggle" class="sidebar-toggle-btn" aria-label="Toggle filters">
+                <i class="fa-solid fa-sliders"></i>
+                <span class="toggle-label">Filters</span>
+                <span id="sidebar-toggle-badge" class="sidebar-toggle-badge hidden"></span>
+            </button>
+
+            <div class="header-logo">
+                <img src="cash_is_clear_logo.jpeg" alt="Cash is Clear Logo" class="header-logo-img">
+                <div>
+                    <h1>Cash is Clear&#174; Maximizer</h1>
+                    <p>The cash flow and profit diagnostic tool.</p>
+                </div>
+            </div>
+
+            <!-- Desktop: inline search -->
+            <div class="header-search">
+                <i class="fa-solid fa-search"></i>
+                <input type="text" id="search-input" placeholder="Search strategies… (min. 5 characters)">
+            </div>
+
+            <div class="header-stats">
+                <div class="stat-box">
+                    <span id="total-available" class="stat-number">0</span>
+                    <span class="stat-label">Strategies Available</span>
+                </div>
+                <div class="stat-box">
+                    <span id="total-results" class="stat-number">0</span>
+                    <span class="stat-label">Strategies Identified</span>
+                </div>
+            </div>
+
+            <!-- Phone: search icon (expands search bar below header) -->
+            <button id="mobile-search-toggle" class="mobile-search-toggle" aria-label="Search" aria-expanded="false">
+                <i class="fa-solid fa-search"></i>
+            </button>
+        </header>
+
+        <!-- Phone: expandable search bar (slides down under header) -->
+        <div id="mobile-search-bar" class="mobile-search-bar" aria-hidden="true">
+            <div class="mobile-search-inner">
+                <i class="fa-solid fa-search"></i>
+                <input type="text" id="mobile-search-input" placeholder="Search strategies… (min. 5 chars)">
+                <button id="mobile-search-close" class="mobile-search-close" aria-label="Close search">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Phone: results bar (always visible, shows count + secondary filter btn) -->
+        <div id="mobile-results-bar" class="mobile-results-bar">
+            <span id="mobile-results-text" class="mobile-results-text">Select filters below to get started</span>
+            <button id="secondary-filter-btn" class="secondary-filter-btn hidden">
+                <i class="fa-solid fa-filter"></i>
+                Filter Strategies
+                <span id="secondary-filter-count" class="secondary-filter-count hidden"></span>
+            </button>
+        </div>
+
+        <!-- Content Area: Sidebar + Main -->
+        <div class="content-area">
+
+            <!-- Sidebar (desktop) / Secondary filter panel (phone, opens from left) -->
+            <aside class="sidebar" id="sidebar">
+                <div class="sidebar-header">
+                    <h2>Filters <span id="sidebar-active-count" class="sidebar-active-badge hidden"></span></h2>
+                    <div style="display:flex;align-items:center;gap:0.5rem;">
+                        <button id="reset-filters" class="btn btn-text">
+                            <i class="fa-solid fa-rotate-right"></i> Reset
+                        </button>
+                        <button id="sidebar-close" class="sidebar-close-btn btn btn-text" aria-label="Close" style="display:none;">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="filters-container" id="filters-container"></div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+
+                <!-- Desktop: primary filter pill bar -->
+                <div id="primary-filters-container" class="primary-filters">
+                    <span class="primary-filters-label">Filters:</span>
+                    <div class="primary-filters-grid" id="primary-filters-grid"></div>
+                    <span id="primary-active-count" class="primary-active-badge">0 active filters</span>
+                    <button id="reset-primary-filters" class="btn btn-text btn-text-sm">
+                        <i class="fa-solid fa-rotate-right"></i> Clear
+                    </button>
+                </div>
+
+                <!-- Card list (phone) -->
+                <div id="card-list-container" class="card-list-container hidden"></div>
+
+                <!-- Data table (tablet + desktop) -->
+                <div class="table-responsive hidden" id="strategies-table-container">
+                    <table class="strategies-table">
+                        <thead>
+                            <tr>
+                                <th class="sticky-col width-narrow sortable" data-sort="#"># <i class="fa-solid fa-sort sort-icon"></i></th>
+                                <th class="sticky-col sticky-col-2 width-wide sortable" data-sort="Strategy">Strategy <i class="fa-solid fa-sort sort-icon"></i></th>
+                                <th class="sortable" data-sort="Cash Position">Cash Position <i class="fa-solid fa-sort sort-icon"></i></th>
+                                <th class="sortable" data-sort="Who controls strategy?">Who Controls <i class="fa-solid fa-sort sort-icon"></i></th>
+                                <th class="sortable" data-sort="Time">Time <i class="fa-solid fa-sort sort-icon"></i></th>
+                                <th class="sortable" data-sort="Profit?">Profit <i class="fa-solid fa-sort sort-icon"></i></th>
+                                <th class="sortable" data-sort="Cash Spend Timing">Cash Spend <i class="fa-solid fa-sort sort-icon"></i></th>
+                                <th class="sortable" data-sort="Cash Receipt Timing">Cash Receipt <i class="fa-solid fa-sort sort-icon"></i></th>
+                                <th class="sortable" data-sort="Risk">Risk <i class="fa-solid fa-sort sort-icon"></i></th>
+                                <th class="sortable" data-sort="Mentor">Mentor <i class="fa-solid fa-sort sort-icon"></i></th>
+                                <th class="sortable" data-sort="Symptom or Root Cause">Symptom/Root <i class="fa-solid fa-sort sort-icon"></i></th>
+                                <th class="sortable" data-sort="Pillar">Pillar <i class="fa-solid fa-sort sort-icon"></i></th>
+                                <th class="sortable" data-sort="Frequency">Frequency <i class="fa-solid fa-sort sort-icon"></i></th>
+                                <th class="sortable" data-sort="Short term benefit">Short Term Benefit <i class="fa-solid fa-sort sort-icon"></i></th>
+                                <th class="sortable" data-sort="Find in Bookkeeping?">Bookkeeping <i class="fa-solid fa-sort sort-icon"></i></th>
+                                <th class="sortable" data-sort="Find in  Reports">Reports <i class="fa-solid fa-sort sort-icon"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody id="strategies-tbody"></tbody>
+                    </table>
+                </div>
+
+                <div id="empty-state" class="empty-state hidden">
+                    <i class="fa-solid fa-lock"></i>
+                    <h3>Select Filters to Unlock Data</h3>
+                    <p>Use the filters above to start exploring strategies.</p>
+                </div>
+
+                <div id="no-results-state" class="empty-state hidden">
+                    <i class="fa-solid fa-box-open"></i>
+                    <h3>No Strategies Found</h3>
+                    <p>Try adjusting your filters or search term.</p>
+                    <button class="btn btn-primary" onclick="document.getElementById('reset-filters').click()">
+                        Clear Filters
+                    </button>
+                </div>
+
+            </main>
+        </div>
+
+        <!-- Phone: primary filter drawer (fixed at bottom) -->
+        <div id="primary-filter-drawer" class="primary-filter-drawer">
+            <div class="pfd-handle-area" id="pfd-handle-area">
+                <div class="pfd-handle"></div>
+                <span class="pfd-title">Quick Filters</span>
+                <span id="pfd-active-count" class="pfd-active-count hidden">0</span>
+                <button id="pfd-reset-btn" class="pfd-reset-btn hidden">
+                    <i class="fa-solid fa-rotate-right"></i> Clear
+                </button>
+            </div>
+            <div id="pfd-sections" class="pfd-sections"></div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>&copy;2026 Safeer Management LLC</p>
+        </footer>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
