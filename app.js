@@ -4,26 +4,26 @@ const MAX_RESULTS = 20;
 
 const FILTER_COLUMNS = [
     { key: 'Cash Position',          label: 'Cash Position' },
-    { key: 'Difficulty',             label: 'Difficulty' },
-    { key: 'Time',                   label: 'Time' },
-    { key: 'Risk',                   label: 'Risk' },
-    { key: 'Who controls strategy?', label: 'Who Controls' },
-    { key: 'Key Department',         label: 'Department' },
+    { key: 'Cash Receipt Timing',    label: 'Cash Receipt' },
+    { key: 'Cash Spend Timing',      label: 'Cash Spend' },
     { key: 'Category',               label: 'Category' },
-    { key: 'Short term benefit',     label: 'Short Term' },
+    { key: 'Key Department',         label: 'Department' },
+    { key: 'Difficulty',             label: 'Difficulty' },
+    { key: 'Every Company?',         label: 'Every Company' },
+    { key: 'Find in Bookkeeping?',   label: 'Find in Bookkeeping' },
+    { key: 'Find in  Reports',       label: 'Find in Reports' },
     { key: 'Frequency',              label: 'Frequency' },
-    { key: 'Symptom or Root Cause',  label: 'Symptom/Root' },
+    { key: 'Large Co.',              label: 'Large Co.' },
+    { key: 'Mentor',                 label: 'Mentor' },
+    { key: 'Non-profit',             label: 'Non-profit' },
     { key: 'Pillar',                 label: 'Pillar' },
     { key: 'Profit?',                label: 'Profit' },
-    { key: 'Cash Spend Timing',      label: 'Cash Spend' },
-    { key: 'Cash Receipt Timing',    label: 'Cash Receipt' },
+    { key: 'Risk',                   label: 'Risk' },
+    { key: 'Short term benefit',     label: 'Short-Term' },
     { key: 'Solo/Micro',             label: 'Solo/Micro' },
-    { key: 'Large Co.',              label: 'Large Co.' },
-    { key: 'Non-profit',             label: 'Non-profit' },
-    { key: 'Every Company?',         label: 'Every Company' },
-    { key: 'Find in Bookkeeping?',   label: 'Bookkeeping' },
-    { key: 'Find in  Reports',       label: 'Reports' },
-    { key: 'Mentor',                 label: 'Mentor' },
+    { key: 'Symptom or Root Cause',  label: 'Symptom/Root' },
+    { key: 'Time',                   label: 'Time' },
+    { key: 'Who controls strategy?', label: 'Who Controls' },
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -341,25 +341,28 @@ document.addEventListener('DOMContentLoaded', () => {
             const diffClass  = diff.toLowerCase().includes('easy')       ? 'badge-green' : diff.toLowerCase().includes('hard')      ? 'badge-red'   : 'badge-gray';
 
             tr.innerHTML = `
-                <td class="sticky-col width-narrow text-muted">${s['#'] || '-'}</td>
-                <td class="sticky-col sticky-col-2 width-wide strategy-title-cell">${String(s['Strategy'] || '-')}</td>
+                <td class="sticky-col width-wide strategy-title-cell">${String(s['Strategy']             || '-')}</td>
                 <td><span class="status-badge ${cashClass}">${cashPos}</span></td>
-                <td><span class="status-badge ${diffClass}">${diff}</span></td>
-                <td>${String(s['Who controls strategy?'] || '-')}</td>
-                <td>${String(s['Time']                   || '-')}</td>
-                <td><span class="status-badge ${profClass}">${prof}</span></td>
-                <td>${String(s['Cash Spend Timing']      || '-')}</td>
                 <td>${String(s['Cash Receipt Timing']    || '-')}</td>
-                <td><span class="status-badge ${riskClass}">${risk}</span></td>
-                <td>${String(s['Key Department']         || '-')}</td>
+                <td>${String(s['Cash Spend Timing']      || '-')}</td>
                 <td>${String(s['Category']               || '-')}</td>
-                <td>${String(s['Frequency']              || '-')}</td>
-                <td>${String(s['Short term benefit']     || '-')}</td>
-                <td>${String(s['Symptom or Root Cause']  || '-')}</td>
-                <td>${String(s['Pillar']                 || '-')}</td>
+                <td>${String(s['Key Department']         || '-')}</td>
+                <td><span class="status-badge ${diffClass}">${diff}</span></td>
+                <td>${String(s['Every Company?']         || '-')}</td>
                 <td>${String(s['Find in Bookkeeping?']   || '-')}</td>
                 <td>${String(s['Find in  Reports']       || '-')}</td>
+                <td>${String(s['Frequency']              || '-')}</td>
+                <td>${String(s['Large Co.']              || '-')}</td>
                 <td>${String(s['Mentor']                 || '-')}</td>
+                <td>${String(s['Non-profit']             || '-')}</td>
+                <td>${String(s['Pillar']                 || '-')}</td>
+                <td><span class="status-badge ${profClass}">${prof}</span></td>
+                <td><span class="status-badge ${riskClass}">${risk}</span></td>
+                <td>${String(s['Short term benefit']     || '-')}</td>
+                <td>${String(s['Solo/Micro']             || '-')}</td>
+                <td>${String(s['Symptom or Root Cause']  || '-')}</td>
+                <td>${String(s['Time']                   || '-')}</td>
+                <td>${String(s['Who controls strategy?'] || '-')}</td>
             `;
             tbody.appendChild(tr);
         });

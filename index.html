@@ -61,19 +61,17 @@
                 </div>
                 <div class="stat-box">
                     <span id="total-results" class="stat-number">0</span>
-                    <span class="stat-label">Showing</span>
+                    <span class="stat-label">Identified</span>
                 </div>
+                <button id="reset-filters" class="btn btn-reset">
+                    <i class="fa-solid fa-rotate-right"></i> Reset
+                </button>
             </div>
         </header>
 
         <!-- Filter Bar -->
         <div class="filter-bar-wrapper">
             <div class="filter-bar" id="filter-bar"></div>
-            <div class="filter-bar-actions">
-                <button id="reset-filters" class="btn btn-text btn-text-sm">
-                    <i class="fa-solid fa-rotate-right"></i> Reset All
-                </button>
-            </div>
         </div>
 
         <!-- Results limit notice -->
@@ -90,25 +88,28 @@
                 <table class="strategies-table">
                     <thead>
                         <tr>
-                            <th class="sticky-col width-narrow sortable" data-sort="#"># <i class="fa-solid fa-sort sort-icon"></i></th>
-                            <th class="sticky-col sticky-col-2 width-wide sortable" data-sort="Strategy">Strategy <i class="fa-solid fa-sort sort-icon"></i></th>
-                            <th class="sortable" data-sort="Cash Position">Cash Position <i class="fa-solid fa-sort sort-icon"></i></th>
-                            <th class="sortable" data-sort="Difficulty">Difficulty <i class="fa-solid fa-sort sort-icon"></i></th>
-                            <th class="sortable" data-sort="Who controls strategy?">Who Controls <i class="fa-solid fa-sort sort-icon"></i></th>
-                            <th class="sortable" data-sort="Time">Time <i class="fa-solid fa-sort sort-icon"></i></th>
-                            <th class="sortable" data-sort="Profit?">Profit <i class="fa-solid fa-sort sort-icon"></i></th>
-                            <th class="sortable" data-sort="Cash Spend Timing">Cash Spend <i class="fa-solid fa-sort sort-icon"></i></th>
-                            <th class="sortable" data-sort="Cash Receipt Timing">Cash Receipt <i class="fa-solid fa-sort sort-icon"></i></th>
-                            <th class="sortable" data-sort="Risk">Risk <i class="fa-solid fa-sort sort-icon"></i></th>
-                            <th class="sortable" data-sort="Key Department">Department <i class="fa-solid fa-sort sort-icon"></i></th>
+                            <th class="sticky-col width-wide sortable" data-sort="Strategy">Strategy <i class="fa-solid fa-sort sort-icon"></i></th>
+                            <th class="sortable th-multiline" data-sort="Cash Position">Cash<br>Position <i class="fa-solid fa-sort sort-icon"></i></th>
+                            <th class="sortable th-multiline" data-sort="Cash Receipt Timing">Cash<br>Receipt <i class="fa-solid fa-sort sort-icon"></i></th>
+                            <th class="sortable th-multiline" data-sort="Cash Spend Timing">Cash<br>Spend <i class="fa-solid fa-sort sort-icon"></i></th>
                             <th class="sortable" data-sort="Category">Category <i class="fa-solid fa-sort sort-icon"></i></th>
+                            <th class="sortable" data-sort="Key Department">Department <i class="fa-solid fa-sort sort-icon"></i></th>
+                            <th class="sortable" data-sort="Difficulty">Difficulty <i class="fa-solid fa-sort sort-icon"></i></th>
+                            <th class="sortable th-multiline" data-sort="Every Company?">Every<br>Company <i class="fa-solid fa-sort sort-icon"></i></th>
+                            <th class="sortable th-multiline" data-sort="Find in Bookkeeping?">Find in<br>Bookkeeping <i class="fa-solid fa-sort sort-icon"></i></th>
+                            <th class="sortable th-multiline" data-sort="Find in  Reports">Find in<br>Reports <i class="fa-solid fa-sort sort-icon"></i></th>
                             <th class="sortable" data-sort="Frequency">Frequency <i class="fa-solid fa-sort sort-icon"></i></th>
-                            <th class="sortable" data-sort="Short term benefit">Short Term Benefit <i class="fa-solid fa-sort sort-icon"></i></th>
-                            <th class="sortable" data-sort="Symptom or Root Cause">Symptom/Root <i class="fa-solid fa-sort sort-icon"></i></th>
-                            <th class="sortable" data-sort="Pillar">Pillar <i class="fa-solid fa-sort sort-icon"></i></th>
-                            <th class="sortable" data-sort="Find in Bookkeeping?">Bookkeeping <i class="fa-solid fa-sort sort-icon"></i></th>
-                            <th class="sortable" data-sort="Find in  Reports">Reports <i class="fa-solid fa-sort sort-icon"></i></th>
+                            <th class="sortable th-multiline" data-sort="Large Co.">Large<br>Co. <i class="fa-solid fa-sort sort-icon"></i></th>
                             <th class="sortable" data-sort="Mentor">Mentor <i class="fa-solid fa-sort sort-icon"></i></th>
+                            <th class="sortable th-multiline" data-sort="Non-profit">Non-<br>profit <i class="fa-solid fa-sort sort-icon"></i></th>
+                            <th class="sortable" data-sort="Pillar">Pillar <i class="fa-solid fa-sort sort-icon"></i></th>
+                            <th class="sortable" data-sort="Profit?">Profit <i class="fa-solid fa-sort sort-icon"></i></th>
+                            <th class="sortable" data-sort="Risk">Risk <i class="fa-solid fa-sort sort-icon"></i></th>
+                            <th class="sortable th-multiline" data-sort="Short term benefit">Short-Term<br>Benefit <i class="fa-solid fa-sort sort-icon"></i></th>
+                            <th class="sortable th-multiline" data-sort="Solo/Micro">Solo/<br>Micro <i class="fa-solid fa-sort sort-icon"></i></th>
+                            <th class="sortable th-multiline" data-sort="Symptom or Root Cause">Symptom /<br>Root <i class="fa-solid fa-sort sort-icon"></i></th>
+                            <th class="sortable" data-sort="Time">Time <i class="fa-solid fa-sort sort-icon"></i></th>
+                            <th class="sortable th-multiline" data-sort="Who controls strategy?">Who<br>Controls <i class="fa-solid fa-sort sort-icon"></i></th>
                         </tr>
                     </thead>
                     <tbody id="strategies-tbody"></tbody>
